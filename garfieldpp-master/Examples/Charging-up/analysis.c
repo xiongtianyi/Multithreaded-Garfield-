@@ -1,5 +1,5 @@
 //------------------------------------------------------------------//
-// Author: QXHusky
+// Author: Xiong Tianyi
 // Final editable version (paper-style Z distribution plot)
 //------------------------------------------------------------------//
 
