@@ -1,0 +1,25 @@
+# - Config file for the Garfield++ package
+#
+ 
+# - Init CMakePackageConfigHelpers
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(ROOT 6.0 COMPONENTS Geom Gdml)
+find_dependency(GSL)
+find_dependency(Magboltz)
+
+if(@OpenMP_CXX_FOUND@)
+  find_dependency(OpenMP)
+endif()
+
+if(@WITH_DEGRADE@)
+  find_dependency(Degrade)
+endif()
+
+# - Include the targets file to create the imported targets that a client can
+# link to (libraries) or execute (programs)
+include("${CMAKE_CURRENT_LIST_DIR}/GarfieldTargets.cmake")
+
+check_required_components(Garfield)

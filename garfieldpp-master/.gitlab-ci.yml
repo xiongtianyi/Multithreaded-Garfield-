@@ -1,0 +1,89 @@
+# Docker images all from:
+# https://github.com/root-project/root-docker
+
+
+build-alma9:
+  stage: build
+  image: rootproject/root:6.30.02-alma9
+  before_script:
+    - yum install libXmu-devel motif-devel -y
+  script:
+    - rm -rf build
+    - mkdir build
+    - cd build
+    - cmake3 -DCMAKE_INSTALL_PREFIX=/usr/local -DROOTSYS=/usr/lib ../
+    - make -j4
+    - make install
+  artifacts:
+    paths:
+      # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+      # cache:
+      #   paths:
+      #     - "*.o"  
+      
+# Docker image chosen to match build instructions at:
+# https://garfieldpp.web.cern.ch/garfieldpp/getting-started/
+#build-centos7-view97:
+#  stage: build
+#  image: rootproject/root:6.22.02-centos7
+#  before_script:
+#    - yum install libXmu-devel motif-devel -y
+#  script:
+#    - source /cvmfs/sft.cern.ch/lcg/views/LCG_97/x86_64-centos7-gcc9-opt/setup.sh
+#    - rm -rf build
+#    - mkdir build
+#    - cd build
+#    - cmake  -DCMAKE_INSTALL_PREFIX=/usr/local ../
+#    - make -j4
+#    - make install
+
+build-ubuntu23:
+  stage: build
+  #image: rootproject/root:latest
+  image: rootproject/root:6.30.06-ubuntu23.10
+  script:
+    - rm -rf build
+    - mkdir build
+    - cd build
+    - cmake -DROOTSYS=/usr/lib ../
+    - make -j4
+    - make install
+
+build-ubuntu22:
+  stage: build
+  image: rootproject/root:6.30.04-ubuntu22.04
+  script:
+    - rm -rf build
+    - mkdir build
+    - cd build
+    - cmake -DROOTSYS=/usr/lib ../
+    - make -j4
+    - make install
+
+build-fedora32:
+  stage: build
+  image: rootproject/root:6.22.02-fedora32
+  script:
+    - rm -rf build
+    - mkdir build
+    - cd build
+    - cmake -DROOTSYS=/usr/lib ../
+    - make -j4
+    - make install
+    
+build-fedora33:
+  stage: build
+  image: rootproject/root:6.22.06-fedora33
+  script:
+    - rm -rf build
+    - mkdir build
+    - cd build
+    - cmake -DROOTSYS=/usr/lib ../
+    - make -j4
+    - make install
+
+# run tests using the binary built before
+#test:
+#  stage: test
+#  script:
+#    - ./runmytests.sh

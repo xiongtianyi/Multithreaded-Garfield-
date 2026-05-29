@@ -1,0 +1,3 @@
+add_executable(RandomNumberGenerators RandomNumberGenerators.cpp)
+target_link_libraries(RandomNumberGenerators PRIVATE Garfield::Garfield)
+add_test(NAME RandomNumberGenerators COMMAND RandomNumberGenerators)
