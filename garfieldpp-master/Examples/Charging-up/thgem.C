@@ -2,6 +2,7 @@
 // Usage:
 //   ./thgem [N] [chunk_size] [num_threads] [total_events]
 //   ./thgem 1 1 32 10000
+// Author: Xiong Tianyi
 //------------------------------------------------------------------//
 
 #include <algorithm>
