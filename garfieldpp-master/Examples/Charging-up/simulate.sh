@@ -2,8 +2,7 @@
 ###############################################################################
 # File: run_simulation.sh
 # Description: 自动化批量运行 COMSOL、Garfield (THGEM) 和 ROOT 分析。
-# Author: YourName
-# Updated by ChatGPT
+# Author: Xiong Tianyi
 ###############################################################################
 
 #----------------------#
