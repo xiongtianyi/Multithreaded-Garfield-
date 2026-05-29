@@ -2,7 +2,7 @@
 // Draw result1: gain evolution vs iteration number
 // Fit: G(n) = G_inf + A1 exp(-n/tau1) + A2 exp(-n/tau2)
 // Error bar: 1% relative error for each gain point
-// Author: Tianyi Xiong, revised for JINST response figures
+// Author: Tianyi Xiong
 //------------------------------------------------------------------//
 
 #include <iostream>
