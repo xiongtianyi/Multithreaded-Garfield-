@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project(thgem)
+project(gem)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,7 +18,7 @@ include_directories(${ROOT_INCLUDE_DIRS})
 
 # ---Build executables----------------------------------------------------------
 # 添加主程序
-add_executable(thgem thgem.C)
+add_executable(gem gem.C)
 add_executable(analysis analysis.c)
 add_executable(output output.c)
 add_executable(position position.c)
@@ -27,7 +27,7 @@ set_source_files_properties(output.c PROPERTIES LANGUAGE CXX)
 set_source_files_properties(position.c PROPERTIES LANGUAGE CXX)
 
 # 链接 Garfield++ 和 ROOT 库
-target_link_libraries(thgem Garfield::Garfield ${ROOT_LIBRARIES})
+target_link_libraries(gem Garfield::Garfield ${ROOT_LIBRARIES})
 target_link_libraries(analysis Garfield::Garfield ${ROOT_LIBRARIES})  # 新增analysis的链接
 target_link_libraries(output Garfield::Garfield ${ROOT_LIBRARIES})
 target_link_libraries(position Garfield::Garfield ${ROOT_LIBRARIES})
