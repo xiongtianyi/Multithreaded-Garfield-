@@ -11,7 +11,7 @@
 set -euo pipefail
 
 COUNT=300                       # 外部循环次数
-GARFIELD="./thgem"                # Garfield可执行文件
+GARFIELD="./gem"                # Garfield可执行文件
 ANALYSIS="./analysis"           # ROOT分析工具
 COMSOL_MODEL="comsol/THGEM.mph" # COMSOL模型文件
 INPUT_FILE="output.txt"         # 输入参数文件
