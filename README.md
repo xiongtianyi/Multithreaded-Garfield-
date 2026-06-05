@@ -28,7 +28,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 ```text
 Charging-up/
-├── gem.C              # 多线程 Garfield++ 主模拟程序
+├── gem.C                # 多线程 Garfield++ 主模拟程序
 ├── analysis.c           # 从 ROOT 端点计算并累积表面电荷
 ├── output.c             # 可选：增益随迭代轮数变化的后处理
 ├── position.c           # 可选：电子/离子端点三维可视化
