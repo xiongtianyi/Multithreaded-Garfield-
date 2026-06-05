@@ -51,7 +51,7 @@ set(COMSOL_FILES
 
 # 复制数据文件到构建目录的 simdata 文件夹
 add_custom_command(
-    TARGET thgem POST_BUILD
+    TARGET gem POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
         ${SIMDATA_FILES}
         ${CMAKE_BINARY_DIR}/simdata/
@@ -59,7 +59,7 @@ add_custom_command(
 )
 # 复制数据文件到构建目录的 comsol 文件夹
 add_custom_command(
-    TARGET thgem POST_BUILD
+    TARGET gem POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
         ${COMSOL_FILES}
         ${CMAKE_BINARY_DIR}/comsol/
