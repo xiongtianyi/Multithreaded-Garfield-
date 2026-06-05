@@ -1,7 +1,7 @@
 [README.md](https://github.com/user-attachments/files/28376509/README.md)
 # THGEM Charging-up 多线程模拟
 
-本目录用于 THGEM 充电效应模拟。核心流程是：COMSOL 计算电场，`thgem` 用 Garfield++ 做多线程雪崩和离子漂移，`analysis` 根据电子/离子端点更新介质表面的累计电荷，下一轮 COMSOL 再读入累计电荷重新计算电场。
+本目录用于 THGEM 充电效应模拟。核心流程是：COMSOL 计算电场，`gem` 用 Garfield++ 做多线程雪崩和离子漂移，`analysis` 根据电子/离子端点更新介质表面的累计电荷，下一轮 COMSOL 再读入累计电荷重新计算电场。
 
 ## 目标环境
 
