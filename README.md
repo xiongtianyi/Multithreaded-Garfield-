@@ -28,7 +28,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 ```text
 Charging-up/
-├── thgem.C              # 多线程 Garfield++ 主模拟程序
+├── gem.C              # 多线程 Garfield++ 主模拟程序
 ├── analysis.c           # 从 ROOT 端点计算并累积表面电荷
 ├── output.c             # 可选：增益随迭代轮数变化的后处理
 ├── position.c           # 可选：电子/离子端点三维可视化
@@ -97,7 +97,7 @@ make -j"$(nproc)"
 编译成功后应得到：
 
 ```text
-build/thgem
+build/gem
 build/analysis
 build/output
 build/position
@@ -105,9 +105,9 @@ build/position
 
 同时 `simdata/`、`comsol/`、`output.txt` 和 `simulate.sh` 会被复制到 `build/`。
 
-## thgem 主程序
+## gem 主程序
 
-`thgem` 是基础多线程模拟程序，负责：
+`gem` 是基础多线程模拟程序，负责：
 
 - 读取 `simdata/THGEM.mphtxt`、`simdata/THGEM.txt` 和 `simdata/dielectrics.dat`
 - 设置 Ne/CH4 = 95/5 气体，温度 293.15 K，压力 760 Torr
@@ -119,7 +119,7 @@ build/position
 运行格式：
 
 ```bash
-./thgem [N] [chunk_size] [num_threads] [total_events]
+./gem [N] [chunk_size] [num_threads] [total_events]
 ```
 
 | 参数 | 含义 | 默认值 |
@@ -133,12 +133,12 @@ build/position
 
 ```bash
 cd build
-./thgem 1 1 32 10000
+./gem 1 1 32 10000
 ```
 
 ## ROOT 输出结构
 
-`thgem` 只写一个名为 `Tree` 的 TTree：
+`gem` 只写一个名为 `Tree` 的 TTree：
 
 | 分支 | 类型 | 每组数据含义 |
 |------|------|--------------|
@@ -192,7 +192,7 @@ n1,n2,n3,...,n22
 cd build
 
 # 第 1 轮 Garfield++ 模拟
-./thgem 1 1 32 10000
+./gem 1 1 32 10000
 
 # 根据第 1 轮端点更新 output.txt
 ./analysis 1
@@ -201,7 +201,7 @@ cd build
 如果要继续第 2 轮，需要先让 COMSOL 6.3 读取新的 `output.txt` 并重新导出 `simdata/THGEM.txt`、`simdata/THGEM.mphtxt`，然后再运行：
 
 ```bash
-./thgem 2 5 32 10000
+./gem 2 5 32 10000
 ./analysis 2
 ```
 
@@ -212,7 +212,7 @@ cd build
 ```text
 读取 output.txt
 -> comsol batch 更新电场
--> ./thgem N
+-> ./gem N
 -> ./analysis N 更新 output.txt
 -> 进入下一轮
 ```
@@ -229,7 +229,7 @@ chmod +x simulate.sh
 
 ```bash
 COUNT=100
-GARFIELD="./thgem"
+GARFIELD="./gem"
 ANALYSIS="./analysis"
 COMSOL_MODEL="comsol/THGEM.mph"
 INPUT_FILE="output.txt"
@@ -319,7 +319,7 @@ source /path/to/garfieldpp/install/share/Garfield/setupGarfield.sh
 echo "$LD_LIBRARY_PATH"
 ```
 
-如果 `analysis` 找不到 `Tree`，说明 `thgem` 没有成功写出 `result/resultN.root`，或运行目录不是 `build/`。
+如果 `analysis` 找不到 `Tree`，说明 `gem` 没有成功写出 `result/resultN.root`，或运行目录不是 `build/`。
 
 如果每轮电荷没有变化，优先检查 COMSOL 是否真正重新导出了 `simdata/THGEM.txt`。可以用文件时间戳确认：
 
