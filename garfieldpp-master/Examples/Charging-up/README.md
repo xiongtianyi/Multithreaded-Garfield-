@@ -1,6 +1,6 @@
 # THGEM Charging-up 多线程模拟
 
-本目录用于 THGEM 充电效应模拟。核心流程是：COMSOL 计算电场，`thgem` 用 Garfield++ 做多线程雪崩和离子漂移，`analysis` 根据电子/离子端点更新介质表面的累计电荷，下一轮 COMSOL 再读入累计电荷重新计算电场。
+本目录用于 THGEM 充电效应模拟。核心流程是：COMSOL 计算电场，`gem` 用 Garfield++ 做多线程雪崩和离子漂移，`analysis` 根据电子/离子端点更新介质表面的累计电荷，下一轮 COMSOL 再读入累计电荷重新计算电场。
 
 ## 目标环境
 
@@ -31,7 +31,7 @@ Charging-up/
 ├── analysis.c           # 从 ROOT 端点计算并累积表面电荷
 ├── output.c             # 可选：增益随迭代轮数变化的后处理
 ├── position.c           # 可选：电子/离子端点三维可视化
-├── simulate.sh          # COMSOL -> thgem -> analysis 自动迭代脚本
+├── simulate.sh          # COMSOL -> gem -> analysis 自动迭代脚本
 ├── CMakeLists.txt       # 构建配置
 ├── output.txt           # COMSOL 读取的累计表面电荷参数
 ├── comsol/
@@ -104,9 +104,9 @@ build/position
 
 同时 `simdata/`、`comsol/`、`output.txt` 和 `simulate.sh` 会被复制到 `build/`。
 
-## thgem 主程序
+## gem 主程序
 
-`thgem` 是基础多线程模拟程序，负责：
+`gem` 是基础多线程模拟程序，负责：
 
 - 读取 `simdata/THGEM.mphtxt`、`simdata/THGEM.txt` 和 `simdata/dielectrics.dat`
 - 设置 Ne/CH4 = 95/5 气体，温度 293.15 K，压力 760 Torr
@@ -132,12 +132,12 @@ build/position
 
 ```bash
 cd build
-./thgem 1 1 32 10000
+./gem 1 1 32 10000
 ```
 
 ## ROOT 输出结构
 
-`thgem` 只写一个名为 `Tree` 的 TTree：
+`gem` 只写一个名为 `Tree` 的 TTree：
 
 | 分支 | 类型 | 每组数据含义 |
 |------|------|--------------|
@@ -318,7 +318,7 @@ source /path/to/garfieldpp/install/share/Garfield/setupGarfield.sh
 echo "$LD_LIBRARY_PATH"
 ```
 
-如果 `analysis` 找不到 `Tree`，说明 `thgem` 没有成功写出 `result/resultN.root`，或运行目录不是 `build/`。
+如果 `analysis` 找不到 `Tree`，说明 `gem` 没有成功写出 `result/resultN.root`，或运行目录不是 `build/`。
 
 如果每轮电荷没有变化，优先检查 COMSOL 是否真正重新导出了 `simdata/THGEM.txt`。可以用文件时间戳确认：
 
